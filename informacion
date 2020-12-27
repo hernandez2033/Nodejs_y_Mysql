@@ -1,0 +1,28 @@
+informacion adicional del proyecto
+
+modulos instalados:
+express 
+express-handlebars 
+express-session 
+mysql 
+express-mysql-session 
+morgan 
+bcryptjs 
+passport 
+passport-local 
+timeago.js 
+connect-flash 
+express-validator
+
+forma de instalarlo:
+npm i express express-handlebars express-session mysql express-mysql-session morgan bcryptjs passport passport-local timeago.js connect-flash express-validator
+
+modulo adicional:
+
+nodemon
+
+se instala: 
+npm i nodemon -D
+
+nota: para usar el comando mkdir se deve de separar por , cada nombre de carpeta
+eje: mkdir lbi, public, nota 
