@@ -4,7 +4,7 @@
   "description": "creando un CRUD con Node y Mysql",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/"
+    "dev": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",

@@ -22,16 +22,17 @@ app.set('view engine', '.hbs');
 //Middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
-app.use(express.json);
+//si el servidor da una respuest en consola GET / - - ms - - es por que as declarado mal json y no json()
+app.use(express.json());
 
 //Global Variables
 app.use((req, res, next) => {
-
+    
     next();
 });
 
 //Routes
-app.use(require('./routes/index'));//requerimos index.js de la ruta ./routes/
+app.use(require('./routes/index.js'));//requerimos index.js de la ruta ./routes/
 app.use(require('./routes/authentication'));
 app.use('/links', require('./routes/links'));
 
