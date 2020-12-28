@@ -3,6 +3,6 @@ module.exports = {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'ddatabase_links'
+        database: 'database_links'
     }
 };
