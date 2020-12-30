@@ -19,6 +19,8 @@ router.post('/add', async (req, res) => {
         description
     };
     await pool.query('INSERT INTO links set ?', [newlink]);
+    //primer parametro nombre sel mensaje 'success' segundo parametro mensaje a mostrar
+    req.flash('success', 'link saved successfully');//aca definimos el mensaje a mostrar
     //console.log(newlink);
     res.redirect('/links');//aca retorna a la ruta links
 });
@@ -36,6 +38,7 @@ router.get('/', async (req, res) => {//aca se le indica que pinte en la ruta lin
 router.get('/delete/:id', async (req, res) =>{
     const { id } = req.params;//desde req.params requiero solo el id 
     await pool.query('DELETE FROM links WHERE ID = ?', [id]);
+    req.flash('success', 'Links Removed Successfully');
     res.redirect('/links');
 });
 
@@ -57,8 +60,8 @@ router.post('/edit/:id', async (req, res)=>{
         description,
         url
     };
-    console.log(newlink);
     await pool.query('UPDATE links set ? WHERE id = ?', [newlink, id]);
+    req.flash('success', 'Link Updated Successfully');
     res.redirect('/links');
 });
 

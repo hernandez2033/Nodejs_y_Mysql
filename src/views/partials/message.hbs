@@ -1,0 +1,15 @@
+{{!--aca agreo la estructura del alerta--}}
+{{#if success }}<!-- {#if esta sentencia deve de ir tal cual si hay un espacio entre la llave y el #if dara error -->
+        <div class="containe p-4">
+            <div class="row">
+                <div class="col-md-4 mx-auto">
+                    <div class="alert alert-success alert-dismiss fase show" role="alert">
+                        {{ success }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <samp aria-hidden="true">&times;</samp>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/if }}<!-- {/if esta sentencia deve de ir tal cual si hay un espacio entre la llave y el /if dara error -->

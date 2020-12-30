@@ -2,6 +2,12 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const flash = require('connect-flash');
+const seccion = require('express-session');
+const MySQLStore = require('express-mysql-session');
+
+//extrayendo la conexion a la base de datos 
+const { database } = require('./keys');
 
 //initializations
 const app = express();
@@ -20,14 +26,23 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 //Middlewares
+//configuranco la cesion 
+app.use(seccion({
+    secret: 'mysqlnodeseccion',
+    resave: false,
+    saveUninitialized: false,
+    store: new MySQLStore(database)//aca le pasamos la conexion de la base de datos
+}));
+app.use(flash());//para poder enviar mensajes emergentes
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 //si el servidor da una respuest en consola GET / - - ms - - es por que as declarado mal json y no json()
 app.use(express.json());
 
+
 //Global Variables
 app.use((req, res, next) => {
-    
+    app.locals.success = req.flash('success');
     next();
 });
 
