@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const helpers = {};
 //cuando nos registremos
 helpers.encriptPassword = async (password) => {
-    const salt = await bcrypt.getSalt('10'); //entre mas veses se ejecute el algoridmo mas segura sera pero lleva mas tiempo 10 es aseptable
+    const salt = await bcrypt.genSalt(10); //entre mas veses se ejecute el algoridmo mas segura sera pero lleva mas tiempo 10 es aseptable
     const hash = await bcrypt.hash(password, salt);
     return hash;
 };

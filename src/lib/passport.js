@@ -19,7 +19,16 @@ passport.use('local.signup', new LocalStrategy({
         fullname
     };
     newUser.password = await helpers.encriptPassword(password);
-
-    const result = await pool.query('INSET INTO users SET ?', [newUser]);
-    console.log(result);
+    const result = await pool.query('INSERT INTO users SET ?', [newUser]);
+    newUser.id = result.insertId;
+    return done (null, newUser);
 }));
+
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+}); 
+
+passport.deserializeUser( async (id, done) => {
+    const rows = await pool.query('SELECT * FROM  users where id = ?', [id]);
+    done(null, rows[0]);
+});

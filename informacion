@@ -22,7 +22,10 @@ modulo adicional:
 nodemon
 
 se instala: 
-npm i nodemon -D
+npm i nodemon -D  //al implementar -D indica que este modulo solo es usado en desarrollo no el el producto final
+//para ejecutat el script se hace de esta manera
+
+npm run dev
 
 nota: para usar el comando mkdir se deve de separar por , cada nombre de carpeta
 eje: mkdir lbi, public, nota 

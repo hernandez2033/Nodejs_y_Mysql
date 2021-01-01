@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {//aca se le indica que pinte en la ruta lin
 
 router.get('/delete/:id', async (req, res) =>{
     const { id } = req.params;//desde req.params requiero solo el id 
-    await pool.query('DELETE FROM links WHERE ID = ?', [id]);
+    await pool.query('DELETE FROM links WHERE id = ?', [id]);
     req.flash('success', 'Links Removed Successfully');
     res.redirect('/links');
 });
