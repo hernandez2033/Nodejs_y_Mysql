@@ -10,10 +10,23 @@ router.get('/signup', (req, res) => {
 });
 //aca solicitamos el formulario 
 router.post('/signup', passport.authenticate('local.signup', {
-    successRedirect: '/profile',//si la validacion es correcta direccionara a profile
-    failureRedirect: '/signup',//si la validacion es incorrecta redireciona al formulario signup
+    successRedirect: '/profile', //si la validacion es correcta direccionara a profile
+    failureRedirect: '/signup', //si la validacion es incorrecta redireciona al formulario signup
     failureFlash: true
 }));
+
+//integramos la ruta al singnin
+router.get('/signin', (req, res) => {
+    res.render('auth/signin');
+});
+
+router.post('/signin', (req, res) => {
+    passport.authenticate('local.signin', {
+        successRedirect: '/profile', //si el login es correcto que redireccione a profile
+        failureRedirect: '/signin', //si el login falla que redirecione a signin
+        failureFlash: true
+    })(req, res);
+});
 
 router.get('/profile', (req, res) => {
     res.send('this is your profile');
