@@ -12,9 +12,25 @@ passport.use('local.signin', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async(req, username, password, done) => {
-    console.log(req.body);
-    console.log(username);
-    console.log(password);
+    /*console.log(req.body);//para valiar si estamos resibiendo estos datos
+    console.log(username);//para valiar si estamos resibiendo estos datos
+    console.log(password);//para valiar si estamos resibiendo estos datos
+    */
+    const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
+    
+   if (rows.length > 0){//si la longitud de rows es mayor que cero significa que encontro un usuario
+        const user = rows[0];//del arrays resivido mandar la pocicion inical y guradarla en user
+        //proceso de comparacion, entre la clave ingresada y la que existe en la base de datos
+        const validPassword = await helpers.matchPassword(password, user.password);
+        if(validPassword){
+            done(null, user, req.flash('success', 'Welcome ' + user.username));
+        }else{
+            done(null, false, req.flash('message','Incorrect Password'));
+        }
+    } else { //si no encontro ningun usuario
+        return done(null, false, req.flash('message','The Username does not exists'));
+    }
+    
 }));
 
 //para registrar nuevo usuario
